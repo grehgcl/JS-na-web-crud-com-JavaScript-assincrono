@@ -1,9 +1,24 @@
 {
   "profile": [
     {
-      "nome": "gregorio",
+      "nome": "gregorio leal leal",
       "email": "gregogio@alura.com",
       "id": 1
+    },
+    {
+      "nome": "gregorio costa costa",
+      "email": "grehgcl@hotmail.com",
+      "id": 2
+    },
+    {
+      "nome": "fabio ",
+      "email": "fabio@email.com",
+      "id": 3
+    },
+    {
+      "nome": "joao carlos",
+      "email": "joao@email.com",
+      "id": 4
     }
   ]
 }

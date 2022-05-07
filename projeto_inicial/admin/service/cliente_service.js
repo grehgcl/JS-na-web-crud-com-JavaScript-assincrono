@@ -1,7 +1,13 @@
 
  const listaClientes = () => {
     return fetch('http://localhost:3000/profile')
-    .then(resposta => resposta.json())  
+    .then(resposta => {
+        if (resposta.ok){
+            return resposta.json()
+        }
+        throw new Error('Não foi possível obter a lista de clientes')
+    })
+      
 }
 
 const criaCliente = (nome, email) => {
@@ -16,7 +22,10 @@ const criaCliente = (nome, email) => {
     })
 })
 .then(resposta => {
-    return resposta.body
+    if (resposta.ok){
+       return resposta.body 
+    }
+    throw new Error('Não foi possível criar um clientes')
 })
 
 }
@@ -24,10 +33,50 @@ const criaCliente = (nome, email) => {
 const removeCliente = (id) => {
     return fetch(`http://localhost:3000/profile/${id}`,{
         method: 'DELETE',
+ }).then(resposta => {
+        if (resposta.ok){
+            throw new Error('Não foi possível remover um cliente')
+        }
  })
 }
+
+const detalhaCliente = (id) => {
+    return fetch(`http://localhost:3000/profile/${id}`,)
+    .then(resposta => {
+        if (resposta.ok){
+            return resposta.json()
+        }
+        throw new Error('Não foi possível obter os detalhes do cliente')
+        
+    })
+        
+}
+
+const atualiaCliente = ( id, nome, email) => {
+    return fetch(`http://localhost:3000/profile/${id}`,{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nome: nome,
+            email: email,
+        })
+    })
+    .then(resposta => {
+        if (resposta.ok){
+            return resposta.json()
+        }
+        throw new Error('Não foi possível atualizar o cliente')
+        
+    }) 
+
+}
+
 export const clienteService = {
     listaClientes,
     criaCliente,
-    removeCliente
+    removeCliente,
+    detalhaCliente,
+    atualiaCliente
 }
